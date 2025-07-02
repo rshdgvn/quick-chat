@@ -30,7 +30,12 @@ const SideBar = ({ selectedUser, setSelectedUser }) => {
                 Edit Profile
               </p>
               <hr className="my-2 border-t border-gray-500" />
-              <p className="cursor-pointer text-sm">Logout</p>
+              <p
+                className="cursor-pointer text-sm"
+                onClick={() => navigate("/login")}
+              >
+                Logout
+              </p>
             </div>
           </div>
         </div>
