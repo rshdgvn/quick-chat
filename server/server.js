@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import http from "http";
 import "dotenv/config";
+import { connectDB } from "./lib/db.js";
 
 // Create Express app Http server
 const app = express();
@@ -13,5 +14,8 @@ app.use(cors());
 
 app.use("/api/status", (req, res) => res.send("Server is live"));
 
-const PORT = 5000;
+// connect to MongoDB
+await connectDB();
+
+const PORT = process.env.PORT;
 server.listen(PORT, () => console.log("server is running ", PORT));
