@@ -8,7 +8,7 @@ import messageRouter from "./route/messageRoutes.js";
 import { Server } from "socket.io";
 import { Socket } from "dgram";
 
-// Create Express app Http server
+// Create Express app Http server\
 const app = express();
 const server = http.createServer(app);
 
@@ -33,7 +33,7 @@ io.on("connection", (socket) => {
   socket.on('disconnect', () => {
     console.log('User Disconnected', userId);
     delete userSocketMap[userId];
-    io.emit("getOnlineUsers" Object.keys(userSocketMap))
+    io.emit("getOnlineUsers", Object.keys(userSocketMap))
   })
 });
 

@@ -1,14 +1,14 @@
-import cloudinary from "../lib/cloudinary";
-import { generateToken } from "../lib/utils";
-import User from "../models/User";
+import cloudinary from "../lib/cloudinary.js";
+import { generateToken } from "../lib/utils.js";
+import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 
 // Controller to Signup a new user
 export const signup = async (req, res) => {
-  const { fullname, email, password, bio } = req.body;
+  const { fullName, email, password, bio } = req.body;
 
   try {
-    if (!fullname || !email || !password || !bio) {
+    if (!fullName || !email || !password || !bio) {
       return res.json({ success: false, message: "Missing Details" });
     }
     const user = await User.findOne({ email });
@@ -47,13 +47,13 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
     const userData = await User.findOne({ email });
 
-    const isPasswordCorrect = bcrypt.compare(process, userData.password);
+    const isPasswordCorrect = await bcrypt.compare(password, userData.password);
 
     if (!isPasswordCorrect) {
       return res.json({ success: false, message: "Invalid credentials" });
     }
 
-    const token = await generateToken(newUser._id);
+    const token = generateToken(userData._id);
 
     res.json({ success: true, userData, token, message: "Login successful" });
   } catch (error) {
